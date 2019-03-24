@@ -24,7 +24,7 @@ import utils.EncryptUtil;
  */
 @WebServlet("/employees/update")
 public class EmployeesUpdateServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,30 +34,30 @@ public class EmployeesUpdateServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String _token = (String)request.getParameter("_token");
-		if(_token != null && _token.equals(request.getSession().getId())) {
-		    EntityManager em = DBUtil.createEntityManager();
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String _token = (String)request.getParameter("_token");
+        if(_token != null && _token.equals(request.getSession().getId())) {
+            EntityManager em = DBUtil.createEntityManager();
 
-		    Employee e = em.find(Employee.class, (Integer)(request.getSession().getAttribute("employee_id")));
+            Employee e = em.find(Employee.class, (Integer)(request.getSession().getAttribute("employee_id")));
 
 
-		    //現在の値と異なる社員番号が入力されていたら
-		    //重複チェックを行う指定をする
-		    Boolean code_duplicate_check = true;
-		    if(e.getCode().equals(request.getParameter("code"))) {
-		        code_duplicate_check = false;
-	        } else {
-	            e.setCode(request.getParameter("code"));
-	        }
+            //現在の値と異なる社員番号が入力されていたら
+            //重複チェックを行う指定をする
+            Boolean code_duplicate_check = true;
+            if(e.getCode().equals(request.getParameter("code"))) {
+                code_duplicate_check = false;
+            } else {
+                e.setCode(request.getParameter("code"));
+            }
 
-		    //パスワード欄に入力があったら
-		    //パスワードの入力値チェックを行う指定をする
-		    Boolean password_check_flag = true;
-		    String password = request.getParameter("passwaord");
+            //パスワード欄に入力があったら
+            //パスワードの入力値チェックを行う指定をする
+            Boolean password_check_flag = true;
+            String password = request.getParameter("passwaord");
             if(password == null || password.equals("")) {
                 password_check_flag = false;
             } else {
@@ -95,8 +95,8 @@ public class EmployeesUpdateServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/employees/index");
             }
 
-		}
+        }
 
-	}
+    }
 
 }

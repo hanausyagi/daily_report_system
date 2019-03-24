@@ -14,10 +14,10 @@
 				<form method="POST" action="<c:url value='/employees/destroy' />">
 					<input type="hidden" name="_token" value="${_token}" />
 				</form>
-				<script>
+				 <script>
 					function confirmDestroy() {
 						if(confirm("本当に削除してよろしいですか？")) {
-							doucument.form[1].submit();
+							document.forms[1].submit();
 						}
 					}
 				</script>
